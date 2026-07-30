@@ -279,7 +279,7 @@ nav { background:#fff; border-bottom:2px solid var(--border); display:flex; flex
       <p class="proj-tagline">
         Geïnspireerd door de Zweedse aanpak, waar men streeft naar eliminatie van
         baarmoederhalskanker tegen 2027, zetten we ook in Genk een ambitieuze stap
-        richting eliminatie van HPV.
+        richting eliminatie van HPV-gerelateerde kankers.
       </p>
       <span class="proj-badge">Together for HPV Elimination &nbsp;·&nbsp; 90/90/2030</span>
     </div>
@@ -353,7 +353,7 @@ nav { background:#fff; border-bottom:2px solid var(--border); display:flex; flex
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
       <div style="background:#fff;border-radius:8px;padding:12px 14px;border-left:3px solid #9B6DD6;box-shadow:0 1px 4px rgba(0,0,0,.06)">
         <div style="font-weight:700;font-size:.85rem;color:#2E4057;margin-bottom:4px">Screening BHK</div>
-        <div style="font-size:.75rem;color:#666;line-height:1.5">Dekkingsgraad borstkankerscreening op verschillende niveaus.</div>
+        <div style="font-size:.75rem;color:#666;line-height:1.5">Dekkingsgraad baarmoederhalskankerscreening op verschillende niveaus.</div>
       </div>
       <div style="background:#fff;border-radius:8px;padding:12px 14px;border-left:3px solid #9B6DD6;box-shadow:0 1px 4px rgba(0,0,0,.06)">
         <div style="font-weight:700;font-size:.85rem;color:#2E4057;margin-bottom:4px">HPV-vaccinatie</div>
@@ -361,7 +361,7 @@ nav { background:#fff; border-bottom:2px solid var(--border); display:flex; flex
       </div>
       <div style="background:#fff;border-radius:8px;padding:12px 14px;border-left:3px solid #9B6DD6;box-shadow:0 1px 4px rgba(0,0,0,.06)">
         <div style="font-weight:700;font-size:.85rem;color:#2E4057;margin-bottom:4px">Apotheken</div>
-        <div style="font-size:.75rem;color:#666;line-height:1.5">FarmaFlux-registraties van sensibiliseringsgesprekken, folders, doorverwijzingen en vaccinaties via apotheken.</div>
+        <div style="font-size:.75rem;color:#666;line-height:1.5">FarmaFlux-registraties van sensibiliseringsgesprekken, folders, doorverwijzingen en afgeleverde vaccins via apotheken.</div>
       </div>
       <div style="background:#fff;border-radius:8px;padding:12px 14px;border-left:3px solid #9B6DD6;box-shadow:0 1px 4px rgba(0,0,0,.06)">
         <div style="font-weight:700;font-size:.85rem;color:#2E4057;margin-bottom:4px">Huisartsen</div>
@@ -425,7 +425,7 @@ nav { background:#fff; border-bottom:2px solid var(--border); display:flex; flex
     <div class="datasource-badge" id="scr-src-badge"><strong>CVKO</strong>BHK dekkingsgraad · 2020–2024<br>Statistische sectoren 2025 (59)</div>
   </div>
   <div class="side-panel">
-    <div class="panel-header">🩺 Borstkankerscreening BHK</div>
+    <div class="panel-header">🩺 Baarmoederhalskankerscreening BHK</div>
     <div id="scr-sector-warn" style="margin:8px 14px 0;padding:8px 10px;background:#fff8e1;border-left:3px solid #ffd54f;border-radius:0 4px 4px 0;font-size:.73rem;color:#7a5800;line-height:1.5;">
       ⚠️ <strong>Opgelet:</strong> Op sectorniveau schommelen dekkingsgraden sterk door kleine populaties. Data is gevoelig voor kleine wijzigingen en moeilijk te interpreteren.
     </div>
@@ -768,7 +768,7 @@ nav { background:#fff; border-bottom:2px solid var(--border); display:flex; flex
         </div>
         <div class="kpi-card" style="border-left-color:#70AD47;padding:10px 12px">
           <div class="kpi-val" id="apo-kpi-vac" style="font-size:1.2rem;color:#70AD47">—</div>
-          <div class="kpi-lbl">Vaccinaties uitgeleverd</div>
+          <div class="kpi-lbl">Afgeleverde vaccins</div>
         </div>
       </div>
     </div>
@@ -2551,7 +2551,7 @@ const APO_PRODUCTS = {
   5846761: 'Folder HPV-awareness',
   5510185: 'Doorverwijzing arts',
   5521695: 'Doorverwijzing andere zorgverlener',
-  3402799: 'Gardasil 9 (vaccin)',
+  3402799: 'Afgeleverd vaccin',
 };
 const APO_TYPE = {
   5522289: 'sensib',
@@ -2625,22 +2625,22 @@ function initApotheken(){
     {periode:'sep-okt 2025', cnk_code:'5846761', product:'Folder HPV-awareness',       registraties:'5'},
     {periode:'sep-okt 2025', cnk_code:'5510185', product:'Doorverwijzing arts',        registraties:'6'},
     {periode:'sep-okt 2025', cnk_code:'5521695', product:'Doorverwijzing gynaecoloog', registraties:'3'},
-    {periode:'sep-okt 2025', cnk_code:'3402799', product:'Gardasil 9 (vaccin)',        registraties:'4'},
+    {periode:'sep-okt 2025', cnk_code:'3402799', product:'Afgeleverd vaccin',        registraties:'4'},
     {periode:'nov-dec 2025', cnk_code:'5522289', product:'Sensibilisering HPV',        registraties:'12'},
     {periode:'nov-dec 2025', cnk_code:'5846761', product:'Folder HPV-awareness',       registraties:'7'},
     {periode:'nov-dec 2025', cnk_code:'5510185', product:'Doorverwijzing arts',        registraties:'9'},
     {periode:'nov-dec 2025', cnk_code:'5521695', product:'Doorverwijzing gynaecoloog', registraties:'5'},
-    {periode:'nov-dec 2025', cnk_code:'3402799', product:'Gardasil 9 (vaccin)',        registraties:'7'},
+    {periode:'nov-dec 2025', cnk_code:'3402799', product:'Afgeleverd vaccin',        registraties:'7'},
     {periode:'jan-feb 2026', cnk_code:'5522289', product:'Sensibilisering HPV',        registraties:'18'},
     {periode:'jan-feb 2026', cnk_code:'5846761', product:'Folder HPV-awareness',       registraties:'10'},
     {periode:'jan-feb 2026', cnk_code:'5510185', product:'Doorverwijzing arts',        registraties:'13'},
     {periode:'jan-feb 2026', cnk_code:'5521695', product:'Doorverwijzing gynaecoloog', registraties:'8'},
-    {periode:'jan-feb 2026', cnk_code:'3402799', product:'Gardasil 9 (vaccin)',        registraties:'11'},
+    {periode:'jan-feb 2026', cnk_code:'3402799', product:'Afgeleverd vaccin',        registraties:'11'},
     {periode:'mrt-apr 2026', cnk_code:'5522289', product:'Sensibilisering HPV',        registraties:'22'},
     {periode:'mrt-apr 2026', cnk_code:'5846761', product:'Folder HPV-awareness',       registraties:'13'},
     {periode:'mrt-apr 2026', cnk_code:'5510185', product:'Doorverwijzing arts',        registraties:'16'},
     {periode:'mrt-apr 2026', cnk_code:'5521695', product:'Doorverwijzing gynaecoloog', registraties:'10'},
-    {periode:'mrt-apr 2026', cnk_code:'3402799', product:'Gardasil 9 (vaccin)',        registraties:'14'},
+    {periode:'mrt-apr 2026', cnk_code:'3402799', product:'Afgeleverd vaccin',        registraties:'14'},
   ];
 
   let totSensib=0, totFolder=0, totDoorverw=0, totVac=0;
@@ -2684,7 +2684,7 @@ function initApotheken(){
       {label:'Sensibiliseringsgesprek', data:trendSensib,  borderColor:'#7B3FBE',backgroundColor:'rgba(123,63,190,.12)',fill:true,tension:.3,borderWidth:2,pointRadius:3},
       {label:'Folder HPV-awareness',    data:trendFolder,  borderColor:'#C084FC',backgroundColor:'rgba(192,132,252,.10)',fill:true,tension:.3,borderWidth:2,pointRadius:3},
       {label:'Doorverwijzing',          data:trendDoorverw,borderColor:'#4472C4',backgroundColor:'rgba(68,114,196,.10)',fill:true,tension:.3,borderWidth:2,pointRadius:3},
-      {label:'Aangeleverede vaccines',              data:trendVac,     borderColor:'#70AD47',backgroundColor:'rgba(112,173,71,.10)',fill:true,tension:.3,borderWidth:2,pointRadius:3},
+      {label:'Afgeleverde vaccins',              data:trendVac,     borderColor:'#70AD47',backgroundColor:'rgba(112,173,71,.10)',fill:true,tension:.3,borderWidth:2,pointRadius:3},
     ]},
     options:{responsive:true,plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:10}}}},
       scales:{y:{beginAtZero:true,ticks:{stepSize:5}}}}
