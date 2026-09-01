@@ -696,7 +696,7 @@ nav { background:#fff; border-bottom:2px solid var(--border); display:flex; flex
       <div class="kpi-grid" id="nat-kpi"></div>
     </div>
     <div class="buurt-sel" id="nat-sel"></div>
-    <div class="chart-wrap">
+    <div class="chart-wrap" style="height: 250px !important; flex: none !important; min-height: unset !important";>
       <h4 style="font-size:.72rem;text-transform:uppercase;letter-spacing:.7px;color:#999;margin-bottom:8px;font-weight:700;">Top-10 niet-Belgische nationaliteiten</h4>
       <canvas id="chart-nationaliteit"></canvas>
     </div>
@@ -2193,7 +2193,7 @@ function drawNatChart(buurt){
                tooltip:{callbacks:{label:c=>c.raw.toFixed(1)+'% van bevolking buurt'}}},
       scales:{
         x:{ticks:{callback:v=>v+'%',font:{size:10}},grid:{color:'#f0f0f0'}},
-        y:{ticks:{font:{size:10}},grid:{display:false}}
+        y:{ticks:{autoSkip:false,font:{size:10}},grid:{display:false}}
       }
     }});
 }
