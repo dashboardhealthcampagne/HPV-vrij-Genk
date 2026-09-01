@@ -2188,6 +2188,7 @@ function drawNatChart(buurt){
            datasets:[{data:data.map(d=>d.pct).reverse(),
              backgroundColor:BCOLOR[buurt]+'bb',borderWidth:0}]},
     options:{indexAxis:'y',responsive:true,
+      maintainAspectRatio:false,
       plugins:{legend:{display:false},
                title:{display:true,text:BLABEL[buurt]+' — top 10',font:{size:11,weight:'600'},color:'#444'},
                tooltip:{callbacks:{label:c=>c.raw.toFixed(1)+'% van bevolking buurt'}}},
