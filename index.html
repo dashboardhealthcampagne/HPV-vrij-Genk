@@ -2670,7 +2670,7 @@ function initApotheken(){
 
   const prodTotals = {};
   rows.forEach(r=>{ const p=r.product||r.cnk_code; prodTotals[p]=(prodTotals[p]||0)+(parseInt(r.registraties)||0); });
-  const barColors = ['#70AD47','#7B3FBE','#4472C4','#5B8DD9','#C084FC'];
+  const barColors = ['#70AD47','#7B3FBE','#4472C4','#C084FC','#5B8DD9'];
   const ctxBar = document.getElementById('chart-apo-bar').getContext('2d');
   new Chart(ctxBar,{type:'bar',
     data:{labels:Object.keys(prodTotals),datasets:[{
