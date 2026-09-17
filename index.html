@@ -219,6 +219,59 @@ nav { background:#fff; border-bottom:2px solid var(--border); display:flex; flex
   background:linear-gradient(135deg,#7B3FBE,#9B6DD6); color:#fff;
   border-radius:20px; padding:5px 13px; font-size:.76rem; font-weight:700; }
 
+.doelgroepen-container {
+  background: #fff;
+  border-radius: 12px;
+  padding: 14px 18px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  margin-bottom: 18px; }
+.doelgroepen-container h4 {
+  font-size: .70rem;
+  text-transform: uppercase;
+  letter-spacing: .7px;
+  color: #999;
+  font-weight: 700;
+  margin-bottom: 10px; }
+.doelgroepen-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: #e0d0f5; /* Table border grid line color */
+  border: 1px solid #e0d0f5;
+  border-radius: 8px;
+  overflow: hidden; }
+.doelgroep-header {
+  grid-column: span 2;
+  background: linear-gradient(135deg, #e0d0f5 0%, #c9b0eb 100%); /* Elegant top-down header gradient */
+  color: #4A1275;
+  padding: 6px 12px;
+  font-weight: 800;
+  font-size: .78rem;
+  letter-spacing: .5px; }
+.doelgroep-content {
+  background: radial-gradient(circle, #f8f3ff 20%, #f0e8ff 100%); /* Soft radial "glowing center" depth */
+  padding: 8px 14px; }
+.doelgroep-content strong {
+  display: block;
+  font-size: .78rem;
+  color: #4A1275;
+  margin-bottom: 6px; }
+.doelgroep-content ul {
+  list-style-position: outside;
+  padding-left: 1.1em;
+  margin: 0;
+  font-size: .76rem;
+  line-height: 1.4;
+  color: #3a3a4a; }
+.doelgroep-content ul li {
+  margin-bottom: 4px; }
+.doelgroep-content .extra-focus {
+  margin-top: 3px;
+  padding-left: 1.2em; }
+.doelgroep-content .extra-focus li {
+  font-size: .72rem;
+  margin-bottom: 2px; }
+  
 .proj-partners {
   background:#fff; border-radius:12px; padding:20px 26px;
   box-shadow:0 2px 10px rgba(0,0,0,.07); }
@@ -309,10 +362,6 @@ nav { background:#fff; border-bottom:2px solid var(--border); display:flex; flex
         We richten ons in het bijzonder op buurten met een lagere vaccinatiegraad en een
         grote(re) populatie moeilijk bereikbare doelgroepen.
       </p>
-      <div class="proj-highlight">
-        <p>Doelgroepen: jongvolwassenen (15–30 jaar, niet-gevaccineerd) &amp;
-        vrouwen (25–65 jaar) in aanmerking voor screening</p>
-      </div>
       <div class="proj-target-pills" style="margin-top:14px">
         <span class="proj-pill">Met aandacht voor</span>
         <span class="proj-pill">Lage scholing</span>
@@ -343,6 +392,47 @@ nav { background:#fff; border-bottom:2px solid var(--border); display:flex; flex
 
   </div>
 
+  <!-- DOELGROEPEN -->
+  <div class="doelgroepen-container">
+  <h4>Doelgroepen</h4>
+  <div class="doelgroepen-grid">
+    <!-- Vaccinatie Section -->
+    <div class="doelgroep-header">VACCINATIE</div>
+    
+    <div class="doelgroep-content">
+      <strong>Schoolvaccinatie</strong>
+      <ul>
+        <li>Meisjes en jongens van 12 t.e.m 15 jaar (1e tot 3e middelbaar)</li>
+        <li>Via CLB of huisarts</li>
+        <li>Focus: ouders (toestemmingsbrief) en jongeren</li>
+      </ul>
+    </div>
+    
+    <div class="doelgroep-content">
+      <strong>Inhaalvaccinatie</strong>
+      <ul>
+        <li>Mannen en vrouwen van 16 t.e.m 30 jaar die nog niet gevaccineerd werden</li>
+        <li>Immuungecompromitteerde personen t.e.m. 45 jaar</li>
+        <li>Via de huisarts (vaccins op voorschrift te halen bij apotheker)</li>
+        <li><em>Extra focus:</em>
+          <ul class="extra-focus">
+            <li>Mannen ouder dan 19 (geboortejaar 2007) hebben geen vaccin op school gekregen (ingevoerd in 2019)</li>
+            <li>Vrouwen ouder dan 28 (geboortejaar 1997) hebben geen vaccin op school gekregen (ingevoerd in 2010)</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Screening Section -->
+    <div class="doelgroep-header">SCREENING</div>
+    <div class="doelgroep-content" style="grid-column: span 2;">
+      <ul>
+        <li>Tussen 25 en 30j: uitnodiging om de 3 jaar</li>
+        <li>Tussen de 30 en 65j: uitnodiging om de 5 jaar</li>
+      </ul>
+    </div>
+  </div>
+</div>
   <!-- PARTNERS -->
   <div class="proj-partners">
     <h4>Samenwerking</h4>
