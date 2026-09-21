@@ -297,21 +297,15 @@ nav { background:#fff; border-bottom:2px solid var(--border); display:flex; flex
   text-align:center; margin-top:28px; padding:20px;
   font-size:.83rem; color:#777; line-height:1.7; font-style:italic; }
 
-/* Styling for the School Year Map Selection Toggles */
-.year-bar {
-  position: absolute;
-  bottom: 36px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
+/* Styling ONLY for the Vaccinatie School Year Map Toggles */
+.year-bar.vac-year-bar {
   display: flex;
   flex-direction: column;   /* Stacks the title vertically above the pills */
   align-items: center;      /* Centers the title and pills horizontally */
   gap: 6px;                 /* Space between title and pills */
-  background: rgba(255, 255, 255, .96);
   border-radius: 16px;
   padding: 8px 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, .14); }
+}
 
 .year-bar-label {
   color: #888;
@@ -605,7 +599,7 @@ nav { background:#fff; border-bottom:2px solid var(--border); display:flex; flex
       <span class="level-badge" id="lvl-vaccinatie">📍 Genk stad</span>
     </div>
     <!-- Year bar wrapper where buttons will generate -->
-    <div class="year-bar" id="vac-years"></div>
+    <div class="year-bar vac-year-bar" id="vac-years"></div>
     <!-- Updated Legend Title with line-break -->
     <div class="map-legend">
       <h5>Geschatte Dekkingsgraad<br>(scholen)</h5>
