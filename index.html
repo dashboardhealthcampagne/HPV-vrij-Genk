@@ -296,6 +296,32 @@ nav { background:#fff; border-bottom:2px solid var(--border); display:flex; flex
 .proj-closing {
   text-align:center; margin-top:28px; padding:20px;
   font-size:.83rem; color:#777; line-height:1.7; font-style:italic; }
+
+/* Styling for the School Year Map Selection Toggles */
+.year-bar {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;   /* Stacks the title vertically above the pills */
+  align-items: center;      /* Centers the title and pills horizontally */
+  gap: 6px;                 /* Space between title and pills */
+  background: rgba(255, 255, 255, .96);
+  border-radius: 16px;
+  padding: 8px 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .14); }
+
+.year-bar-label {
+  color: #888;
+  font-size: .7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  text-align: center;
+  margin-bottom: 2px; }
+  
 </style>
 </head>
 <body>
@@ -574,15 +600,22 @@ nav { background:#fff; border-bottom:2px solid var(--border); display:flex; flex
 <div id="pane-vaccinatie" class="tab-pane">
   <div class="map-wrap">
     <div id="map-vaccinatie" class="leaflet-map"></div>
-    <div class="layer-ctrl">
+    <!-- Hides the layer controller as we are focusing on Genk (stad) -->
+    <div class="layer-ctrl" style="display: none;">
       <span class="level-badge" id="lvl-vaccinatie">📍 Genk stad</span>
     </div>
+    <!-- Year bar wrapper where buttons will generate -->
     <div class="year-bar" id="vac-years"></div>
+    <!-- Updated Legend Title with line-break -->
     <div class="map-legend">
-      <h5>% Gevaccineerd</h5>
+      <h5>Geschatte Dekkingsgraad<br>(scholen)</h5>
       <div id="leg-vac"></div>
     </div>
-    <div class="datasource-badge"><strong>Vaccinnet</strong>HPV-vaccinatiegraad</div>
+    <!-- Updated methodology and data source citation -->
+    <div class="datasource-badge">
+      <strong>Proxy · Vaccinnet & Statbel</strong>
+      Geschatte dekkingsgraad (CLB-aandeel)
+    </div>
   </div>
   <div class="side-panel">
     <div class="panel-header">💉 HPV-vaccinatie</div>
@@ -2393,136 +2426,156 @@ function initNiveaus(){
 }
 
 // ══ VACCINATIE ════════════════════════════════════════════════════════════════
-function initVaccinatie(){
+function initVaccinatie() {
   const m = makeMap('map-vaccinatie');
-  layerState['vaccinatie'] = 'stad';
 
-  const VAC_IND = 'vaccinatie_hpv';
-  const vacJarenAll = [...new Set(
-    Object.values(SHDATA).flatMap(inds=>Object.keys(inds[VAC_IND]||{}))
-  )].map(Number).sort();
-  const VAC_JAAR = vacJarenAll.length ? Math.max(...vacJarenAll) : 2024;
-  tabJaar.vaccinatie = VAC_JAAR;
+  // --- 1. Estimated School-Year Proxy Dataset ---
+  const schoolYearData = {
+    '2023-2024': {
+      cohort: 2011,
+      coverage: 0.66,
+      girls: 0.69,
+      boys: 0.64
+    },
+    '2024-2025': {
+      cohort: 2012,
+      coverage: 0.57,
+      girls: null, // Data not available yet
+      boys: null   // Data not available yet
+    }
+  };
+  const schoolYears = Object.keys(schoolYearData);
+  let selectedSchoolYear = schoolYears[0]; // Defaults to 2023-2024
 
-  const allVals = Object.values(SHDATA).flatMap(inds=>Object.values(inds[VAC_IND]||{})).filter(v=>v!=null);
-  const mn = allVals.length ? Math.min(...allVals)*0.9 : 0;
-  const mx = allVals.length ? Math.max(...allVals)*1.05 : 100;
+  let vacMapLayer = null;
+  let vacCityMarker = null;
 
-  const secLayer = L.geoJSON(GEO.sectorScr,{
-    style:f=>({fillColor:seqColor(getVal(f.properties.code,VAC_IND,VAC_JAAR),mn,mx,150),fillOpacity:.84,color:'white',weight:.7}),
-    onEachFeature:(f,layer)=>{
-      const p=f.properties;
-      layer.bindTooltip(makeTooltip([p.naam||p.code,
-        ['% Gevaccineerd',fmtPct(getVal(p.code,VAC_IND,VAC_JAAR))],
-        ['Code',p.code]]),{sticky:true,className:'leaflet-tooltip'});
-      layer.on('mouseover',()=>hl(layer,true));
-      layer.on('mouseout',()=>hl(layer,false));
-    }
-  });
-  const buurt8Layer = L.geoJSON(GEO.achtBuurt,{
-    style:f=>({fillColor:seqColor(getVal(f.properties.buurt8,VAC_IND,VAC_JAAR),mn,mx,150),fillOpacity:.84,color:'#fff',weight:1.5}),
-    onEachFeature:(f,layer)=>{
-      const b=f.properties.buurt8;
-      layer.bindTooltip(makeTooltip([b,['% Gevaccineerd',fmtPct(getVal(b,VAC_IND,VAC_JAAR))]]),
-        {sticky:true,className:'leaflet-tooltip'});
-      layer.on('mouseover',()=>hlBuurt(layer,true));
-      layer.on('mouseout',()=>hlBuurt(layer,false));
-    }
-  });
-  const campagneLayer = L.geoJSON(GEO.buurt,{
-    style:f=>({fillColor:seqColor(getVal(f.properties.Buurt,VAC_IND,VAC_JAAR),mn,mx,150),fillOpacity:.84,color:'#fff',weight:1.5}),
-    onEachFeature:(f,layer)=>{
-      const b=f.properties.Buurt;
-      layer.bindTooltip(makeTooltip([BLABEL[b]||b,['% Gevaccineerd',fmtPct(getVal(b,VAC_IND,VAC_JAAR))]]),
-        {sticky:true,className:'leaflet-tooltip'});
-      layer.on('mouseover',()=>hlBuurt(layer,true));
-      layer.on('mouseout',()=>hlBuurt(layer,false));
-    }
-  });
-  const vacStadLayer = L.geoJSON(GEO.genk,{
-    style:()=>({fillColor:seqColor(getVal(STAD_CODE,VAC_IND,VAC_JAAR),mn,mx,150),fillOpacity:.7,color:'#555',weight:2}),
-    onEachFeature:(f,layer)=>{
-      layer.bindTooltip(makeTooltip(['Genk (stad)',['% Gevaccineerd',fmtPct(getVal(STAD_CODE,VAC_IND,VAC_JAAR))]]),
-        {sticky:true,className:'leaflet-tooltip'});
-    }
-  });
+  // --- 2. Map Drawing Function with 50% - 100% Blue-Green Scale ---
+  function drawSchoolYearMap(schoolYear) {
+    if (vacMapLayer) m.removeLayer(vacMapLayer);
+    if (vacCityMarker) m.removeLayer(vacCityMarker);
 
-  layerGroups['vaccinatie'] = {sector:secLayer, buurt8:buurt8Layer, campagne:campagneLayer, stad:vacStadLayer};
-  vacStadLayer.addTo(m);
+    const data = schoolYearData[schoolYear];
+    if (!data) return;
+
+    // Tooltip matches other tabs with "Genk (stad)" title
+    const tooltipContent = makeTooltip([
+      `Genk (stad)`,
+      [`Schooljaar ${schoolYear}`, (data.coverage * 100).toFixed(0) + '%'],
+      ['Meisjes', data.girls ? (data.girls * 100).toFixed(0) + '%' : 'N/A'],
+      ['Jongens', data.boys ? (data.boys * 100).toFixed(0) + '%' : 'N/A']
+    ]);
+
+    // Map fill color mapped dynamically using hue 150 (blue-green) from 50% to 100%
+    vacMapLayer = L.geoJSON(GEO.genk, {
+      style: {
+        fillColor: seqColor(data.coverage * 100, 50, 100, 150),
+        fillOpacity: 0.75,
+        color: '#333',
+        weight: 2
+      }
+    }).addTo(m);
+    vacMapLayer.bindTooltip(tooltipContent, { sticky: true, className: 'leaflet-tooltip' });
+
+    // Large center percentage
+    vacCityMarker = L.marker(vacMapLayer.getBounds().getCenter(), {
+      icon: L.divIcon({
+        className: '',
+        html: `<div style="font-size:2rem;font-weight:800;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.7);">${(data.coverage * 100).toFixed(0)}%</div>`,
+        iconSize: [0, 0]
+      }),
+      interactive: false
+    }).addTo(m);
+  }
+
+  // --- 3. Build Pill Selection Toggles ---
+  const yearBar = document.getElementById('vac-years');
+  yearBar.innerHTML = '<div class="year-bar-label">Schooljaar</div>';
+
+  const btnContainer = document.createElement('div');
+  btnContainer.className = 'tgl-pill'; // Utilizes standard pill toggle class
+
+  schoolYears.forEach(yr => {
+    const b = document.createElement('span'); // Span matches standard option look
+    b.className = 'tgl-opt' + (yr === selectedSchoolYear ? ' active' : '');
+    b.textContent = yr;
+    b.onclick = () => {
+      btnContainer.querySelectorAll('.tgl-opt').forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+      selectedSchoolYear = yr;
+      drawSchoolYearMap(selectedSchoolYear);
+    };
+    btnContainer.appendChild(b);
+  });
+  yearBar.appendChild(btnContainer);
+
+  // --- 4. Render Map, Borders, and Blue-Green Legend ---
+  drawSchoolYearMap(selectedSchoolYear);
   addBuurtBorder(m);
 
-  let vacCityMarker = null;
-  const refreshVacCityMarker = yr => {
-    if(vacCityMarker){ m.removeLayer(vacCityMarker); vacCityMarker=null; }
-    if(layerState.vaccinatie !== 'stad') return;
-    const rate = getVal(STAD_CODE, VAC_IND, yr);
-    if(rate == null) return;
-    vacCityMarker = L.marker(vacStadLayer.getBounds().getCenter(), {
-      icon:L.divIcon({className:'',
-        html:`<div style="font-size:2rem;font-weight:800;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.7);white-space:nowrap;transform:translateX(-50%)">${rate.toFixed(1)}%</div>`,
-        iconSize:[0,0]}),interactive:false}).addTo(m);
-  };
-  layerSwitchCb['vaccinatie'] = () => refreshVacCityMarker(tabJaar.vaccinatie);
-  refreshVacCityMarker(VAC_JAAR);
+  gradLegend('leg-vac',
+    ['hsl(150, 62%, 90%)', 'hsl(150, 62%, 38%)'], // Soft light teal to rich deep forest teal
+    ['50%', '100%']                               // Clean 50% to 100% scale
+  );
 
-  gradLegend('leg-vac',['hsl(150,62%,90%)','hsl(150,62%,64%)','hsl(150,62%,38%)'],
-    [allVals.length?`${Math.round(mn)}%`:'0%','',allVals.length?`${Math.round(mx)}%`:'100%']);
-  appendHatchLegend('leg-vac');
-  buildKpiGrid('vac-kpi',VAC_IND,tabJaar.vaccinatie,v=>v.toFixed(1)+'%','');
-  buildYearBar('vac-years','vaccinatie',VAC_IND, yr=>{
-    refreshSeqLayers('vaccinatie',VAC_IND,mn,mx,150,{});
-    buildKpiGrid('vac-kpi',VAC_IND,yr,v=>v.toFixed(1)+'%','');
-    const grps=layerGroups['vaccinatie'];
-    grps.sector.eachLayer(l=>{const p=l.feature.properties;l.setTooltipContent(makeTooltip([p.naam||p.code,['% Gevaccineerd',fmtPct(getVal(p.code,VAC_IND,yr))],['Code',p.code]]));});
-    grps.buurt8.eachLayer(l=>{const b=l.feature.properties.buurt8;l.setTooltipContent(makeTooltip([b,['% Gevaccineerd',fmtPct(getVal(b,VAC_IND,yr))]]));});
-    grps.campagne.eachLayer(l=>{const b=l.feature.properties.Buurt;l.setTooltipContent(makeTooltip([BLABEL[b]||b,['% Gevaccineerd',fmtPct(getVal(b,VAC_IND,yr))]]));});
-    grps.stad.eachLayer(l=>{l.setTooltipContent(makeTooltip(['Genk (stad)',['% Gevaccineerd',fmtPct(getVal(STAD_CODE,VAC_IND,yr))]]));});
-    refreshVacCityMarker(yr);
-  });
-
-  if(vacJarenAll.length > 0){
+  // --- 5. Maintain Side-Panel Historical Trend Charts ---
+  const birthYearsForCharts = [...new Set(Object.values(SHDATA).flatMap(inds=>Object.keys(inds['vaccinatie_hpv']||{})))].map(Number).sort();
+  if (birthYearsForCharts.length > 0) {
     const vacDs = [...BUURT8, STAD_CODE]
-      .filter(b=>vacJarenAll.some(yr=>getVal(b,VAC_IND,yr)!=null))
-      .map(b=>({
-        label:BLABEL8[b]||b,
-        data:vacJarenAll.map(yr=>getVal(b,VAC_IND,yr)),
-        borderColor:BCOLOR8[b]||STAD_COLOR,
-        backgroundColor:'transparent',
-        borderWidth:1.5, pointRadius:2, tension:.3
+      .filter(b => birthYearsForCharts.some(yr => getVal(b, 'vaccinatie_hpv', yr) != null))
+      .map(b => ({
+        label: BLABEL8[b] || b,
+        data: birthYearsForCharts.map(yr => getVal(b, 'vaccinatie_hpv', yr)),
+        borderColor: BCOLOR8[b] || STAD_COLOR,
+        backgroundColor: 'transparent',
+        borderWidth: 1.5, pointRadius: 2, tension: .3
       }));
-    if(vacDs.length){
+    if (vacDs.length) {
       const ctx = document.getElementById('chart-vaccinatie').getContext('2d');
-      new Chart(ctx,{type:'line',data:{labels:vacJarenAll,datasets:vacDs},
-        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:10}}}},
-          scales:{y:{min:0,max:100,ticks:{callback:v=>v+'%'}}}}});
+      new Chart(ctx, { 
+        type: 'line', 
+        data: { labels: birthYearsForCharts, datasets: vacDs }, 
+        options: { 
+          responsive: true, 
+          maintainAspectRatio: false, 
+          plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } }, 
+          scales: { y: { min: 0, max: 100, ticks: { callback: v => v + '%' } } } 
+        } 
+      });
     }
   }
 
-  // Vaccinatiegraad per onderwijsnet (Genk-niveau, schooljaren)
+  // --- 6. Maintain Network Trend Charts (CLB Networks) ---
   const NET_INDS = [
-    {key:'vaccinatie_hpv_vrijclb', label:'Vrij CLB', color:'#4472C4'},
-    {key:'vaccinatie_hpv_goclb',   label:'GO! CLB',  color:'#ED7D31'}
+    { key: 'vaccinatie_hpv_vrijclb', label: 'Vrij CLB', color: '#4472C4' },
+    { key: 'vaccinatie_hpv_goclb', label: 'GO! CLB', color: '#ED7D31' }
   ];
-  const netJarenAll = [...new Set(
-    NET_INDS.flatMap(ind=>Object.keys(SHDATA[STAD_CODE]?.[ind.key]||{}))
-  )].map(Number).sort();
-  if(netJarenAll.length){
+  const netJarenAll = [...new Set(NET_INDS.flatMap(ind => Object.keys(SHDATA[STAD_CODE]?.[ind.key] || {})))].map(Number).sort();
+  if (netJarenAll.length) {
     const netDs = NET_INDS
-      .filter(ind=>netJarenAll.some(yr=>getVal(STAD_CODE,ind.key,yr)!=null))
-      .map(ind=>({
-        label:ind.label,
-        data:netJarenAll.map(yr=>getVal(STAD_CODE,ind.key,yr)),
-        borderColor:ind.color,
-        backgroundColor:'transparent',
-        borderWidth:1.5, pointRadius:2, tension:.3
+      .filter(ind => netJarenAll.some(yr => getVal(STAD_CODE, ind.key, yr) != null))
+      .map(ind => ({
+        label: ind.label,
+        data: netJarenAll.map(yr => getVal(STAD_CODE, ind.key, yr)),
+        borderColor: ind.color,
+        backgroundColor: 'transparent',
+        borderWidth: 1.5, pointRadius: 2, tension: .3
       }));
-    if(netDs.length){
+    if (netDs.length) {
       const ctxNet = document.getElementById('chart-vac-net').getContext('2d');
-      new Chart(ctxNet,{type:'line',data:{labels:netJarenAll.map(schooljaarLabel),datasets:netDs},
-        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:10}}}},
-          scales:{y:{min:0,max:100,ticks:{callback:v=>v+'%'}}}}});
+      new Chart(ctxNet, { 
+        type: 'line', 
+        data: { labels: netJarenAll.map(schooljaarLabel), datasets: netDs }, 
+        options: { 
+          responsive: true, 
+          maintainAspectRatio: false, 
+          plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } }, 
+          scales: { y: { min: 0, max: 100, ticks: { callback: v => v + '%' } } } 
+        } 
+      });
     }
   }
+  
   initVacDetail();
 }
 
