@@ -917,15 +917,6 @@ nav { background:#fff; border-bottom:2px solid var(--border); display:flex; flex
         </table>
       </div>
     </div>
-    <div class="panel-section" id="apo-groep-placeholder">
-      <h4>Mogelijkheid tot opdeling per groep/apotheek</h4>
-      <div style="font-size:.78rem;color:#777;line-height:1.6;background:#f7f9fc;border-left:3px solid #ccc;padding:9px 12px;border-radius:4px">
-        Nu worden alle FarmaFlux-registraties als één Genk-totaal getoond. Dit kan op twee onafhankelijke manieren uitgebreid worden, zonder codewijziging:
-        <br><br><strong>Per groep</strong> — voeg een kolom <code>groep</code> toe aan de Google Sheets tab "farmaflux_groep" (kolommen: <code>periode · cnk_code · product · registraties · groep</code>). Rijen zonder groep tellen gewoon mee in het Genk-totaal; rijen mét groep verschijnen extra in de tabel hierboven.
-        <br><br><strong>Per apotheek</strong> — maak een nieuwe tab "farmaflux_individueel" aan met kolommen <code>periode · cnk_code · product · registraties · apotheek</code>, voor data die een apotheek zelf rechtstreeks aanlevert (los van de FarmaFlux-totalen, om dubbeltellingen te vermijden).
-        <br><br>De koppeling welke apotheek bij welke groep hoort, staat in een apart tabblad "apotheek_groepen" (<code>apotheek · groep</code>) — apotheken die daar niet in staan, vallen onder "Overige".
-      </div>
-    </div>
     <div class="panel-section" style="padding:0;border-bottom:none;flex:1;overflow-y:auto">
       <div style="padding:12px 14px 6px">
         <h4 style="font-size:.72rem;text-transform:uppercase;letter-spacing:.7px;color:#999;font-weight:700">Detail per periode &amp; type</h4>
