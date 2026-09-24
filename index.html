@@ -334,6 +334,37 @@ nav { background:#fff; border-bottom:2px solid var(--border); display:flex; flex
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0,0,0,.08) !important;
 }
+
+.lees-meer-lijst {
+  list-style-type: none; /* Removes standard browser bullet points */
+  padding-left: 0;
+  margin: 0;
+}
+
+.lees-meer-lijst li {
+  /* Matches the bottom spacing and breathing room of the main text panels */
+  margin-bottom: 12px; 
+  line-height: 1.55 !important; /* 👈 Adds spacious vertical line height */
+}
+
+.lees-meer-lijst a {
+  font-size: .88rem;
+  color: #4A1275;
+  text-decoration: none;
+  font-weight: 500;
+  
+  /* 👈 Matches the smooth letter spacing of the "Het project" body text */
+  letter-spacing: .15px; 
+  
+  border-bottom: 1px solid transparent;
+  transition: all .2s ease;
+  display: inline-block;
+}
+
+.lees-meer-lijst a:hover {
+  color: #7B3FBE;
+  border-bottom-color: #7B3FBE; /* Subtle clean underline on hover */
+}
   
 </style>
 </head>
@@ -528,6 +559,17 @@ nav { background:#fff; border-bottom:2px solid var(--border); display:flex; flex
         <div style="font-size:.75rem;color:#666;line-height:1.5">Uitleg over de geografische niveaus: statistisch sector, wijk, buurt en campagnebuurt.</div>
       </div>
     </div>
+  </div>
+
+    <!-- LEES MEER -->
+  <div class="proj-partners" style="margin-top: 24px;">
+    <h4 style="font-size:.8rem;text-transform:uppercase;letter-spacing:.7px;color:#999;font-weight:700;margin-bottom:14px">Lees meer:</h4>
+    <ul class="lees-meer-lijst">
+      <li><a href="https://www.gezondheidenwetenschap.be/gezondheid-in-de-media/baarmoederhalskanker-en-andere-hpv-kankers-kunnen-uitgeroeid-worden-tegen-2030" target="_blank" rel="noopener noreferrer">Baarmoederhalskanker en andere HPV-kankers kunnen uitgeroeid worden tegen 2030</a></li>
+      <li><a href="https://www.departementzorg.be/nl/infectieziekte/humaan-papillomavirus-hpv" target="_blank" rel="noopener noreferrer">Humaan papillomavirus (HPV) | Departement Zorg</a></li>
+      <li><a href="https://baarmoederhalskanker.bevolkingsonderzoek.be/nl" target="_blank" rel="noopener noreferrer">Home | Baarmoederhalskanker</a></li>
+      <li><a href="https://www.hpvinfo.be/nl/" target="_blank" rel="noopener noreferrer">Home - HPV Belgium NL</a></li>
+    </ul>
   </div>
 
   <p class="proj-closing">
