@@ -324,6 +324,16 @@ nav { background:#fff; border-bottom:2px solid var(--border); display:flex; flex
   letter-spacing: .5px;
   text-align: center;
   margin-bottom: 2px; }
+
+.nav-card {
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.nav-card:hover {
+  background-color: #f7f9fc !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,.08) !important;
+}
   
 </style>
 </head>
@@ -477,43 +487,43 @@ nav { background:#fff; border-bottom:2px solid var(--border); display:flex; flex
   <div style="margin:24px 0">
     <h4 style="font-size:.8rem;text-transform:uppercase;letter-spacing:.7px;color:#999;font-weight:700;margin-bottom:14px">Wat vind je op deze pagina?</h4>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
-      <div style="background:#fff;border-radius:8px;padding:12px 14px;border-left:3px solid #9B6DD6;box-shadow:0 1px 4px rgba(0,0,0,.06)">
+      <div class="nav-card" onclick="goToTab('screening')" style="background:#fff;border-radius:8px;padding:12px 14px;border-left:3px solid #9B6DD6;box-shadow:0 1px 4px rgba(0,0,0,.06)">
         <div style="font-weight:700;font-size:.85rem;color:#2E4057;margin-bottom:4px">Screening BHK</div>
         <div style="font-size:.75rem;color:#666;line-height:1.5">Screeningsgraad BHK op verschillende geografische niveaus.</div>
       </div>
-      <div style="background:#fff;border-radius:8px;padding:12px 14px;border-left:3px solid #9B6DD6;box-shadow:0 1px 4px rgba(0,0,0,.06)">
+      <div class="nav-card" onclick="goToTab('vaccinatie')" style="background:#fff;border-radius:8px;padding:12px 14px;border-left:3px solid #9B6DD6;box-shadow:0 1px 4px rgba(0,0,0,.06)">
         <div style="font-weight:700;font-size:.85rem;color:#2E4057;margin-bottom:4px">HPV-vaccinatie</div>
         <div style="font-size:.75rem;color:#666;line-height:1.5">Vaccinatiegraad HPV per geboortejaar.</div>
       </div>
-      <div style="background:#fff;border-radius:8px;padding:12px 14px;border-left:3px solid #9B6DD6;box-shadow:0 1px 4px rgba(0,0,0,.06)">
+      <div class="nav-card" onclick="goToTab('apotheken')" style="background:#fff;border-radius:8px;padding:12px 14px;border-left:3px solid #9B6DD6;box-shadow:0 1px 4px rgba(0,0,0,.06)">
         <div style="font-weight:700;font-size:.85rem;color:#2E4057;margin-bottom:4px">Apotheken</div>
         <div style="font-size:.75rem;color:#666;line-height:1.5">Betrokken apotheken en registratie van sensibiliseringsgesprekken, folders, doorverwijzingen en afgeleverde vaccins.</div>
       </div>
-      <div style="background:#fff;border-radius:8px;padding:12px 14px;border-left:3px solid #9B6DD6;box-shadow:0 1px 4px rgba(0,0,0,.06)">
+      <div class="nav-card" onclick="goToTab('huisartsen')" style="background:#fff;border-radius:8px;padding:12px 14px;border-left:3px solid #9B6DD6;box-shadow:0 1px 4px rgba(0,0,0,.06)">
         <div style="font-weight:700;font-size:.85rem;color:#2E4057;margin-bottom:4px">Huisartsen</div>
         <div style="font-size:.75rem;color:#666;line-height:1.5">Betrokken huisartsen en BHK- en HPV-data per praktijk.</div>
       </div>
-      <div style="background:#fff;border-radius:8px;padding:12px 14px;border-left:3px solid #aaa;box-shadow:0 1px 4px rgba(0,0,0,.06)">
+      <div class="nav-card" onclick="goToTab('bevolking')" style="background:#fff;border-radius:8px;padding:12px 14px;border-left:3px solid #aaa;box-shadow:0 1px 4px rgba(0,0,0,.06)">
         <div style="font-weight:700;font-size:.85rem;color:#2E4057;margin-bottom:4px">Bevolking</div>
         <div style="font-size:.75rem;color:#666;line-height:1.5">Aantal inwoners op verschillende geografische niveaus. (Statbel, 2025). </div>
       </div>
-      <div style="background:#fff;border-radius:8px;padding:12px 14px;border-left:3px solid #aaa;box-shadow:0 1px 4px rgba(0,0,0,.06)">
+      <div class="nav-card" onclick="goToTab('demografie')" style="background:#fff;border-radius:8px;padding:12px 14px;border-left:3px solid #aaa;box-shadow:0 1px 4px rgba(0,0,0,.06)">
         <div style="font-weight:700;font-size:.85rem;color:#2E4057;margin-bottom:4px">Demografie</div>
         <div style="font-size:.75rem;color:#666;line-height:1.5">Leeftijdsstructuur en vergrijzingsindex op verschillende geografische niveaus. (Statbel, 2025)</div>
       </div>
-      <div style="background:#fff;border-radius:8px;padding:12px 14px;border-left:3px solid #aaa;box-shadow:0 1px 4px rgba(0,0,0,.06)">
+      <div class="nav-card" onclick="goToTab('inkomen')" style="background:#fff;border-radius:8px;padding:12px 14px;border-left:3px solid #aaa;box-shadow:0 1px 4px rgba(0,0,0,.06)">
         <div style="font-weight:700;font-size:.85rem;color:#2E4057;margin-bottom:4px">Inkomen</div>
         <div style="font-size:.75rem;color:#666;line-height:1.5">Mediaan en gemiddeld belastbaar inkomen op verschillende geografische niveaus. (FOD Financiën, 2023).</div>
       </div>
-      <div style="background:#fff;border-radius:8px;padding:12px 14px;border-left:3px solid #aaa;box-shadow:0 1px 4px rgba(0,0,0,.06)">
+      <div class="nav-card" onclick="goToTab('onderwijs')" style="background:#fff;border-radius:8px;padding:12px 14px;border-left:3px solid #aaa;box-shadow:0 1px 4px rgba(0,0,0,.06)">
         <div style="font-weight:700;font-size:.85rem;color:#2E4057;margin-bottom:4px">Onderwijs</div>
         <div style="font-size:.75rem;color:#666;line-height:1.5">Opleidingsniveau op verschillende geografische niveaus. (Census, 2021).</div>
       </div>
-      <div style="background:#fff;border-radius:8px;padding:12px 14px;border-left:3px solid #aaa;box-shadow:0 1px 4px rgba(0,0,0,.06)">
+      <div class="nav-card" onclick="goToTab('nationaliteit')" style="background:#fff;border-radius:8px;padding:12px 14px;border-left:3px solid #aaa;box-shadow:0 1px 4px rgba(0,0,0,.06)">
         <div style="font-weight:700;font-size:.85rem;color:#2E4057;margin-bottom:4px">Nationaliteit</div>
         <div style="font-size:.75rem;color:#666;line-height:1.5">% Belgische en niet-Belgische inwoners op verschillende geografische niveaus (Statbel, 2025).</div>
       </div>
-      <div style="background:#fff;border-radius:8px;padding:12px 14px;border-left:3px solid #aaa;box-shadow:0 1px 4px rgba(0,0,0,.06)">
+      <div class="nav-card" onclick="goToTab('niveaus')" style="background:#fff;border-radius:8px;padding:12px 14px;border-left:3px solid #aaa;box-shadow:0 1px 4px rgba(0,0,0,.06)">
         <div style="font-weight:700;font-size:.85rem;color:#2E4057;margin-bottom:4px">Niveaus</div>
         <div style="font-size:.75rem;color:#666;line-height:1.5">Uitleg over de geografische niveaus: statistisch sector, wijk, buurt en campagnebuurt.</div>
       </div>
@@ -1360,6 +1370,30 @@ function initTab(name){
   if(name==='apotheken')   initApotheken();
   if(name==='huisartsen')  initHuisartsen();
   if(name==='niveaus')     initNiveaus();
+}
+
+function goToTab(tabName) {
+  // Find the button in the top navigation that corresponds to the tabName
+  const navButtons = document.querySelectorAll('nav .tab-btn');
+  let targetButton = null;
+  
+  for (let btn of navButtons) {
+    if (btn.getAttribute('onclick').includes(`'${tabName}'`)) {
+      targetButton = btn;
+      break;
+    }
+  }
+
+  // If we found the button, simulate a click on it
+  if (targetButton) {
+    targetButton.click();
+    
+    // Optional: smoothly scroll the window to the top
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
 }
 
 // ── LAYER TOGGLE ──────────────────────────────────────────────────────────────
