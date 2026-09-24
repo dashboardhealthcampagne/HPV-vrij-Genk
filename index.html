@@ -350,8 +350,8 @@ nav { background:#fff; border-bottom:2px solid var(--border); display:flex; flex
 
 <nav>
   <button class="tab-btn active" onclick="switchTab('project',this)"><span></span> Over het project</button>
-  <button class="tab-btn tab-btn-health" onclick="switchTab('screening',this)"><span></span> Screening BHK</button>
-  <button class="tab-btn tab-btn-health" onclick="switchTab('vaccinatie',this)"><span></span> HPV-vaccinatie</button>
+  <button class="tab-btn tab-btn-health" onclick="switchTab('screening',this)"><span></span> BHK screening</button>
+  <button class="tab-btn tab-btn-health" onclick="switchTab('vaccinatie',this)"><span></span> HPV vaccinatie</button>
   <button class="tab-btn tab-btn-health" onclick="switchTab('apotheken',this)"><span></span> Apotheken</button>
   <button class="tab-btn tab-btn-health" onclick="switchTab('huisartsen',this)"><span></span> Huisartsen</button>
   <button class="tab-btn" onclick="switchTab('bevolking',this)"><span></span> Bevolking</button>
@@ -488,11 +488,11 @@ nav { background:#fff; border-bottom:2px solid var(--border); display:flex; flex
     <h4 style="font-size:.8rem;text-transform:uppercase;letter-spacing:.7px;color:#999;font-weight:700;margin-bottom:14px">Wat vind je op deze pagina?</h4>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
       <div class="nav-card" onclick="goToTab('screening')" style="background:#fff;border-radius:8px;padding:12px 14px;border-left:3px solid #9B6DD6;box-shadow:0 1px 4px rgba(0,0,0,.06)">
-        <div style="font-weight:700;font-size:.85rem;color:#2E4057;margin-bottom:4px">Screening BHK</div>
+        <div style="font-weight:700;font-size:.85rem;color:#2E4057;margin-bottom:4px">BHK screening</div>
         <div style="font-size:.75rem;color:#666;line-height:1.5">Screeningsgraad BHK op verschillende geografische niveaus.</div>
       </div>
       <div class="nav-card" onclick="goToTab('vaccinatie')" style="background:#fff;border-radius:8px;padding:12px 14px;border-left:3px solid #9B6DD6;box-shadow:0 1px 4px rgba(0,0,0,.06)">
-        <div style="font-weight:700;font-size:.85rem;color:#2E4057;margin-bottom:4px">HPV-vaccinatie</div>
+        <div style="font-weight:700;font-size:.85rem;color:#2E4057;margin-bottom:4px">HPV vaccinatie</div>
         <div style="font-size:.75rem;color:#666;line-height:1.5">Vaccinatiegraad HPV per geboortejaar.</div>
       </div>
       <div class="nav-card" onclick="goToTab('apotheken')" style="background:#fff;border-radius:8px;padding:12px 14px;border-left:3px solid #9B6DD6;box-shadow:0 1px 4px rgba(0,0,0,.06)">
@@ -561,7 +561,7 @@ nav { background:#fff; border-bottom:2px solid var(--border); display:flex; flex
     <div class="datasource-badge" id="scr-src-badge"><strong>CVKO</strong>BHK dekkingsgraad · 2020–2024<br>Statistische sectoren 2025 (59)</div>
   </div>
   <div class="side-panel">
-    <div class="panel-header">🩺 Baarmoederhalskankerscreening BHK</div>
+    <div class="panel-header">🩺 Baarmoederhalskanker screening</div>
     <div id="scr-sector-warn" style="margin:8px 14px 0;padding:8px 10px;background:#fff8e1;border-left:3px solid #ffd54f;border-radius:0 4px 4px 0;font-size:.73rem;color:#7a5800;line-height:1.5;">
       ⚠️ <strong>Opgelet:</strong> Op sectorniveau schommelen dekkingsgraden sterk door kleine populaties. Data is gevoelig voor kleine wijzigingen en moeilijk te interpreteren.
     </div>
@@ -630,7 +630,7 @@ nav { background:#fff; border-bottom:2px solid var(--border); display:flex; flex
     </div>
   </div>
   <div class="side-panel">
-    <div class="panel-header">💉 HPV-vaccinatie</div>
+    <div class="panel-header">💉 HPV vaccinatie</div>
     <div class="panel-section">
       <h4>Referentiecijfers</h4>
       <div class="ref-box">
