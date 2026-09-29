@@ -1295,7 +1295,7 @@ function schooljaarLabel(yr){ return `${String(yr%100).padStart(2,'0')}/${String
 function makeMap(id){
   if(maps[id]) return maps[id];
   const m = L.map(id,{zoomControl:true,attributionControl:false}).setView(GENK_CENTER,12);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(m);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=cb1_41rz_1_9024d7cc1aef2f7052bbb205').addTo(m);
   maps[id] = m; return m;
 }
 
