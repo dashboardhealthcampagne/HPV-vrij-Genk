@@ -2388,6 +2388,7 @@ function drawNatChart(buurt){
 
 // ══ NIVEAUS ═══════════════════════════════════════════════════════════════════
 let nivLayers = {};
+let apothekenInitialized = false
 
 function buildWijkTable(highlightCamp){
   const rows=WIJK_TABLE.map(r=>{
@@ -2743,6 +2744,7 @@ const APO_TYPE = {
 };
 
 function initApotheken(){
+  if (apothekenInitialized) return;
   // ── Kaart ────────────────────────────────────────────────────────────────────
   const m = makeMap('map-apotheken');
 
@@ -2799,6 +2801,7 @@ function initApotheken(){
   });
 
   m.invalidateSize();
+  apothekenInitialized = true;
 
   // ── FarmaFlux data (Genk-totaal, evt. met groep) ─────────────────────────────
   const rows = FARMAFLUX_GROEP.length ? FARMAFLUX_GROEP : [
