@@ -685,14 +685,6 @@ nav { background:#fff; border-bottom:2px solid var(--border); display:flex; flex
         <div class="ref-row"><span class="ref-name">Europese doelstelling (2030)</span><span class="ref-val" style="color:#2c7bb6">90%</span></div>
       </div>
     </div>
-    <div class="panel-section">
-      <h4>Vaccinatiegraad</h4>
-      <div class="kpi-grid" id="vac-kpi"></div>
-    </div>
-    <div class="chart-wrap">
-      <h4 style="font-size:.72rem;text-transform:uppercase;letter-spacing:.7px;color:#999;margin-bottom:8px;font-weight:700;">Evolutie vaccinatiegraad (%)</h4>
-      <canvas id="chart-vaccinatie"></canvas>
-    </div>
     <div class="chart-wrap">
       <div style="display:flex;justify-content:space-between;align-items:center">
         <h4 style="font-size:.72rem;text-transform:uppercase;letter-spacing:.7px;color:#999;margin-bottom:8px;font-weight:700;">Vaccinatiegraad per onderwijsnet — Genk (schooljaar)</h4>
@@ -2581,33 +2573,6 @@ function initVaccinatie() {
     ['hsl(150, 62%, 90%)', 'hsl(150, 62%, 38%)'], // Soft light teal to rich deep forest teal
     ['50%', '100%']                               // Clean 50% to 100% scale
   );
-
-  // --- 5. Maintain Side-Panel Historical Trend Charts ---
-  const birthYearsForCharts = [...new Set(Object.values(SHDATA).flatMap(inds=>Object.keys(inds['vaccinatie_hpv']||{})))].map(Number).sort();
-  if (birthYearsForCharts.length > 0) {
-    const vacDs = [...BUURT8, STAD_CODE]
-      .filter(b => birthYearsForCharts.some(yr => getVal(b, 'vaccinatie_hpv', yr) != null))
-      .map(b => ({
-        label: BLABEL8[b] || b,
-        data: birthYearsForCharts.map(yr => getVal(b, 'vaccinatie_hpv', yr)),
-        borderColor: BCOLOR8[b] || STAD_COLOR,
-        backgroundColor: 'transparent',
-        borderWidth: 1.5, pointRadius: 2, tension: .3
-      }));
-    if (vacDs.length) {
-      const ctx = document.getElementById('chart-vaccinatie').getContext('2d');
-      new Chart(ctx, { 
-        type: 'line', 
-        data: { labels: birthYearsForCharts, datasets: vacDs }, 
-        options: { 
-          responsive: true, 
-          maintainAspectRatio: false, 
-          plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } }, 
-          scales: { y: { min: 0, max: 100, ticks: { callback: v => v + '%' } } } 
-        } 
-      });
-    }
-  }
 
   // --- 6. Maintain Network Trend Charts (CLB Networks) ---
   const NET_INDS = [
